@@ -7,39 +7,43 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State var pokemon = [PokemonEntry]()
+struct HomeView: View {
+    @State var pokemon = [PokemonEntryModel]()
     @State var searchText = ""
-    
-    
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(searchText == "" ? pokemon: pokemon.filter( {$0.name.contains(searchText.lowercased())} )) {
-                    entry in
-                    
-                    HStack {
-                        PokemonImage(imageLink: "\(entry.url)")
-                            .padding(.trailing, 20)
-                        
+                    entry in HStack {
+                        PokemonImageView(imageLink: getIDFromUrl(url: entry.url)).padding(.trailing, 20)
                         NavigationLink("\(entry.name)".capitalized ,destination: Text(entry.name))
                     }
                 }
             }
-            
             .onAppear {
-                PokeApi().getData() { pokemon in
-                    self.pokemon = pokemon
+                PokeApiList().getData() {
+                    pokemon in self.pokemon = pokemon
                 }
             }
+            .overlay(loadingOverlay)
             .searchable(text: $searchText)
             .navigationTitle("Pokedex")
+        }
+    }
+    
+    @ViewBuilder private var loadingOverlay: some View {
+        if pokemon.isEmpty {
+            ZStack {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
     }
 }
