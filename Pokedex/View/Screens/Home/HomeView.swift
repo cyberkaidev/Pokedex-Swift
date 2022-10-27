@@ -17,7 +17,13 @@ struct HomeView: View {
                 ForEach(searchText == "" ? pokemon: pokemon.filter( {$0.name.contains(searchText.lowercased())} )) {
                     entry in HStack {
                         PokemonImageView(imageLink: getIDFromUrl(url: entry.url)).padding(.trailing, 20)
-                        NavigationLink("\(entry.name)".capitalized ,destination: Text(entry.name))
+                        NavigationLink(
+                            "\(entry.name)".capitalized,
+                            destination: DetailsView(
+                                id: getIDFromUrl(url: entry.url),
+                                name: entry.name.capitalized
+                            )
+                        )
                     }
                 }
             }
@@ -34,10 +40,7 @@ struct HomeView: View {
     
     @ViewBuilder private var loadingOverlay: some View {
         if pokemon.isEmpty {
-            ZStack {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-            }
+            ZStack { LoadingView() }
         }
     }
 }
