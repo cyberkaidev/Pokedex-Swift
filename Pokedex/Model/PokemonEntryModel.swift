@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonModel : Codable {
+struct PokemonsModel : Codable {
     var results: [PokemonEntryModel]
 }
 

@@ -14,7 +14,7 @@ class PokeApiList {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             
-            let pokemonList = try! JSONDecoder().decode(PokemonModel.self, from: data)
+            let pokemonList = try! JSONDecoder().decode(PokemonsModel.self, from: data)
             
             DispatchQueue.main.async {
                 completion(pokemonList.results)
