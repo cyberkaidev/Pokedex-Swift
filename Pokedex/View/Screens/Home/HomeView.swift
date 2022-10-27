@@ -16,7 +16,8 @@ struct HomeView: View {
             List {
                 ForEach(searchText == "" ? pokemon: pokemon.filter( {$0.name.contains(searchText.lowercased())} )) {
                     entry in HStack {
-                        PokemonImageView(imageLink: getIDFromUrl(url: entry.url)).padding(.trailing, 20)
+                        PokemonImageDefaultView(id: getIDFromUrl(url: entry.url))
+                            .padding(.trailing, 20)
                         NavigationLink(
                             "\(entry.name)".capitalized,
                             destination: DetailsView(
