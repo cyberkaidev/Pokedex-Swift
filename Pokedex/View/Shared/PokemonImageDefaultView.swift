@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct PokemonImageView: View {
-    @State var imageLink = ""
-    @State private var urlPokemon = ""
+struct PokemonImageDefaultView: View {
+    @State var id = ""
+    @State var size: CGFloat? = 75
     
     var body: some View {
-        AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(imageLink).png"))
-            .frame(width: 75, height: 75)
+        AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png"))
+            .frame(width: size, height: size)
             .clipShape(Circle())
             .foregroundColor(Color.gray.opacity(0.60))
             .scaledToFit()
@@ -22,7 +22,7 @@ struct PokemonImageView: View {
 
 struct PokemonDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonImageView()
+        PokemonImageDefaultView()
             .previewInterfaceOrientation(.portrait)
     }
 }
