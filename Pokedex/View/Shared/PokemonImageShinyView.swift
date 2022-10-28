@@ -23,7 +23,7 @@ struct PokemonImageShinyView: View {
                                 .foregroundColor(Color.gray.opacity(0.60))
                                 
                         } placeholder: {
-                            Color.gray
+                            Color.gray.opacity(0.60)
                         }
                         .clipShape(Circle())
                         .foregroundColor(Color.gray.opacity(0.60))
@@ -40,7 +40,7 @@ struct PokemonImageShinyView: View {
                                 .foregroundColor(Color.gray.opacity(0.60))
                                 
                         } placeholder: {
-                            Color.gray
+                            Color.gray.opacity(0.60)
                         }
                         .clipShape(Circle())
                         .foregroundColor(Color.gray.opacity(0.60))
